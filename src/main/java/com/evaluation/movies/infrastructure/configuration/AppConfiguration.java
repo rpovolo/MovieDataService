@@ -13,4 +13,8 @@ public class AppConfiguration {
         return new IndexMoviesUseCaseImpl(indexMoviesPort);
     }
 
+    @Bean
+    public SearchMoviesUseCase searchMoviesUseCase(SearchMoviesPort searchMoviesPort) {
+        return new SearchMoviesUseCaseImpl(searchMoviesPort);
+    }
 }

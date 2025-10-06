@@ -49,10 +49,12 @@ public class MovieRepositoryAdapter implements MovieRepositoryPort {
                 ))
                 .build();
 
-        return elasticsearchOperations.search(query, Movie.class)
-                .stream()
+        SearchHits<MovieEntity> hits = elasticsearchOperations.search(query, MovieEntity.class);
+        List<MovieEntity> entities = hits.stream()
                 .map(SearchHit::getContent)
                 .toList();
+
+        return movieEntityMapper.toDomains(entities);
     }
 
     /**
@@ -68,8 +70,12 @@ public class MovieRepositoryAdapter implements MovieRepositoryPort {
                         q.term(t -> t.field("year").value(year)))
                 .build();
 
-        SearchHits<Movie> hits = elasticsearchOperations.search(query, Movie.class);
-        return hits.stream().map(SearchHit::getContent).toList();
+        SearchHits<MovieEntity> hits = elasticsearchOperations.search(query, MovieEntity.class);
+        List<MovieEntity> entities = hits.stream()
+                .map(SearchHit::getContent)
+                .toList();
+
+        return movieEntityMapper.toDomains(entities);
     }
 
     /**
@@ -89,8 +95,12 @@ public class MovieRepositoryAdapter implements MovieRepositoryPort {
                         ))
                 .build();
 
-        SearchHits<Movie> hits = elasticsearchOperations.search(query, Movie.class);
-        return hits.stream().map(SearchHit::getContent).toList();
+        SearchHits<MovieEntity> hits = elasticsearchOperations.search(query, MovieEntity.class);
+        List<MovieEntity> entities = hits.stream()
+                .map(SearchHit::getContent)
+                .toList();
+
+        return movieEntityMapper.toDomains(entities);
     }
 
     /**
@@ -100,13 +110,18 @@ public class MovieRepositoryAdapter implements MovieRepositoryPort {
      */
     @Override
     public List<Movie> findAll() {
+
         var query = NativeQuery.builder()
-                .withQuery(q ->
-                        q.matchAll(m -> m))
+                .withQuery(q -> q.matchAll(m -> m))
                 .build();
 
-        SearchHits<Movie> hits = elasticsearchOperations.search(query, Movie.class);
-        return hits.stream().map(SearchHit::getContent).toList();
+        SearchHits<MovieEntity> hits = elasticsearchOperations.search(query, MovieEntity.class);
+
+        List<MovieEntity> entities = hits.stream()
+                .map(SearchHit::getContent)
+                .toList();
+
+        return movieEntityMapper.toDomains(entities);
     }
 
     /**
@@ -116,7 +131,7 @@ public class MovieRepositoryAdapter implements MovieRepositoryPort {
      */
     @Override
     public void saveAll(List<Movie> movies) {
-        List<MovieEntity> movieEntities = movieEntityMapper.toDomains(movies);
+        List<MovieEntity> movieEntities = movieEntityMapper.toEntities(movies);
 
         try {
             elasticsearchOperations.save(movieEntities);

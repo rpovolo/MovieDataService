@@ -63,8 +63,8 @@ public class IndexMoviesPortAdapter implements IndexMoviesPort {
             MovieResponseDTO firstPage = moviesClient.getMovies(1);
 
             List<MovieDTO> allMovies =
-                    java.util.stream.IntStream.rangeClosed(1, firstPage.total_pages())
-                            .mapToObj(page -> moviesClient.getMovies(page).data())
+                    java.util.stream.IntStream.rangeClosed(1, firstPage.getTotal_pages())
+                            .mapToObj(page -> moviesClient.getMovies(page).getData())
                             .flatMap(List::stream)
                             .toList();
 

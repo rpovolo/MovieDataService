@@ -11,6 +11,8 @@ import java.util.List;
 public interface  MovieEntityMapper {
     Movie toDomain(MovieEntity movieEntity);
     MovieEntity toEntity(Movie movie);
-    List<MovieEntity> toDomains(List<Movie> movie);
+    List<Movie> toDomains(List<MovieEntity> movieEntities);
+    List<MovieEntity> toEntities(List<Movie> movie);
+
 
 }
