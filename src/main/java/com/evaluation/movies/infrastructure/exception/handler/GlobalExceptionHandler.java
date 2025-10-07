@@ -20,8 +20,8 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     private static final String BFF_PREFIX_ERROR = "OPERATIONS-ERROR";
-    private static final String ERROR_CODE_KEY = "codigo";
-    private static final String ERROR_MESSAGE_KEY = "mensaje";
+    private static final String ERROR_CODE_KEY = "code";
+    private static final String ERROR_MESSAGE_KEY = "message";
     private static final String DEFAULT_ERROR_MESSAGE = "Unknown error";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -46,15 +46,16 @@ public class GlobalExceptionHandler {
     /**
      * Creates an ErrorDetail object from an exception and a response map.
      *
-     * @param exception             the exception that occurred
-     * @param renaperErrorResponse  the response data from RENAPER
+     * @param exception     the exception that occurred
+     * @param errorResponse the response data containing error information
      * @return an ErrorDetail object with the extracted error information
      */
-    private ErrorDetail createErrorDetail(Exception exception, Map<String, Object> renaperErrorResponse) {
+    private ErrorDetail createErrorDetail(Exception exception, Map<String, Object> errorResponse) {
         log.error("{} : {}.", BFF_PREFIX_ERROR, exception.getMessage(), exception);
         return ErrorDetail.builder()
-                .code((int) renaperErrorResponse.getOrDefault(ERROR_CODE_KEY, HttpStatus.NOT_FOUND.value()))
-                .message((String) renaperErrorResponse.getOrDefault(ERROR_MESSAGE_KEY, DEFAULT_ERROR_MESSAGE))
+                .code((int) errorResponse.getOrDefault(ERROR_CODE_KEY, HttpStatus.NOT_FOUND.value()))
+                .message((String) errorResponse.getOrDefault(ERROR_MESSAGE_KEY, DEFAULT_ERROR_MESSAGE))
                 .build();
     }
+
 }
