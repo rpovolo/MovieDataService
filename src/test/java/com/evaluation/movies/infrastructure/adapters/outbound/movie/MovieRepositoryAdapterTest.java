@@ -1,14 +1,6 @@
 package com.evaluation.movies.infrastructure.adapters.outbound.movie;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.*;
-
-import java.util.List;
-import java.util.stream.Stream;
-
 import com.evaluation.movies.domain.model.Movie;
-import com.evaluation.movies.infrastructure.adapters.inbound.rest.MovieController;
 import com.evaluation.movies.infrastructure.adapters.outbound.movie.entity.MovieEntity;
 import com.evaluation.movies.infrastructure.adapters.outbound.movie.mappers.MovieEntityMapper;
 import org.junit.jupiter.api.Test;
@@ -16,12 +8,19 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.Query;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class MovieRepositoryAdapterTest {

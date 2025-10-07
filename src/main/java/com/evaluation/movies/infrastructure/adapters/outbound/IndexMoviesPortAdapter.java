@@ -3,8 +3,6 @@ package com.evaluation.movies.infrastructure.adapters.outbound;
 import com.evaluation.movies.application.ports.outbound.IndexMoviesPort;
 import com.evaluation.movies.domain.model.Movie;
 import com.evaluation.movies.domain.repository.MovieRepositoryPort;
-import com.evaluation.movies.infrastructure.adapters.outbound.movie.entity.MovieEntity;
-import com.evaluation.movies.infrastructure.adapters.outbound.movie.mappers.MovieEntityMapper;
 import com.evaluation.movies.infrastructure.exception.InternalServerErrorException;
 import com.evaluation.movies.infrastructure.gateways.MoviesClient;
 import com.evaluation.movies.infrastructure.mappers.MovieMapper;

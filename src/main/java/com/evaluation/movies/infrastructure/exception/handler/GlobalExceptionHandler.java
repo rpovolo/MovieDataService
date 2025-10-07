@@ -1,9 +1,8 @@
 package com.evaluation.movies.infrastructure.exception.handler;
 
 import com.evaluation.movies.infrastructure.exception.InternalServerErrorException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.evaluation.movies.infrastructure.exception.LoanApplicationNotFoundException;
 import com.evaluation.movies.infrastructure.exception.dto.ErrorDetail;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

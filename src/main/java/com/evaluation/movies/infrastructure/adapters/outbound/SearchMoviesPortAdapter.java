@@ -1,6 +1,5 @@
 package com.evaluation.movies.infrastructure.adapters.outbound;
 
-import com.evaluation.movies.application.ports.outbound.IndexMoviesPort;
 import com.evaluation.movies.application.ports.outbound.SearchMoviesPort;
 import com.evaluation.movies.domain.model.Movie;
 import com.evaluation.movies.domain.repository.MovieRepositoryPort;
